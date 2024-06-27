@@ -1,0 +1,29 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  width: 90%;
+  max-width: 1110px;
+  text-align: center;
+}
+
+.button {
+  width: 180px;
+  height: 50px;
+  background-color: #41e662;
+  color: #ffffff;
+  font-size: 20px;
+  font-family: roboto;
+  display: flex;
+  flex-direction: row;
+  border-radius: 25px;
+  align-items: center;
+  align-self: center;
+  border: none;
+  outline: none;
+  justify-content: space-around;
+}
