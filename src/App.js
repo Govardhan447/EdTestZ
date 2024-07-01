@@ -1,6 +1,8 @@
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
-import SigninForm from './components/SigninForm'
+import SignIn from './components/SignIn'
+
+import SignUp from './components/SignUp'
 
 import Home from './components/Home'
 
@@ -12,7 +14,8 @@ const App = () => (
   <div className="bg-container">
     <BrowserRouter>
       <Switch>
-        <Route exact path="/signin" component={SigninForm} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signin" component={SignIn} />
         <Route exact path="/" component={Home} />
         <Route component={NotFound} />
       </Switch>

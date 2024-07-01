@@ -5,10 +5,36 @@ import {FcGoogle} from 'react-icons/fc'
 
 import './index.css'
 
-class SigninForm extends Component {
+class SignIn extends Component {
   state = {
     username: '',
     password: '',
+  }
+
+  state = {
+    username: '',
+    password: '',
+  }
+
+  onSubmitSuccess = () => {
+    const {history} = this.props
+    history.replace('/')
+  }
+
+  submitForm = async event => {
+    event.preventDefault()
+    const {username, password} = this.state
+    const userDetails = {username, password}
+    const url = 'http://localhost/5000/signin'
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(userDetails),
+    }
+    const response = await fetch(url, options)
+    const data = await response.json()
+    if (response.ok === true) {
+      this.onSubmitSuccess()
+    }
   }
 
   onChangeUsername = event => {
@@ -59,7 +85,7 @@ class SigninForm extends Component {
     return (
       <div className="bg-container">
         <div className="login-form-container">
-          <form className="form-container">
+          <form className="form-container" onSubmit={this.submitForm}>
             <h1 className="login-heading">login</h1>
             <div className="input-container">{this.renderUsernameField()}</div>
             <div className="input-container">{this.renderPasswordField()}</div>
@@ -95,4 +121,4 @@ class SigninForm extends Component {
   }
 }
 
-export default SigninForm
+export default SignIn

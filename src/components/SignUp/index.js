@@ -3,14 +3,44 @@ import {Link} from 'react-router-dom'
 import {FaFacebook} from 'react-icons/fa'
 import {FcGoogle} from 'react-icons/fc'
 import {LuEyeOff} from 'react-icons/lu'
+import {RxEyeOpen} from 'react-icons/rx'
 
 import './index.css'
 
-class SignupForm extends Component {
+class SignUp extends Component {
   state = {
     username: '',
     password: '',
     confirmPassword: '',
+    showPassword: false,
+    isPasswordMatching: false,
+  }
+
+  onSubmitSuccess = () => {
+    const {history} = this.props
+    history.replace('/singin')
+  }
+
+  onsubmitForm = async event => {
+    event.preventDefault()
+
+    const {username, password, confirmPassword} = this.state
+
+    if (password === confirmPassword) {
+      const userDetails = {username, password, confirmPassword}
+      const url = 'http://localhost/5000/signup'
+      const options = {
+        method: 'POST',
+        body: JSON.stringify(userDetails),
+      }
+      const response = await fetch(url, options)
+      const data = await response.json()
+      if (response.ok === true) {
+        this.onSubmitSuccess()
+      }
+    } else {
+      this.setState({isPasswordMatching: true})
+    }
   }
 
   onChangeUsername = event => {
@@ -22,7 +52,11 @@ class SignupForm extends Component {
   }
 
   onChangeConfirmPassword = event => {
-    this.setState({password: event.target.value})
+    this.setState({confirmPassword: event.target.value})
+  }
+
+  onClickShowPassword = () => {
+    this.setState(prevState => ({showPassword: !prevState.showPassword}))
   }
 
   renderUsernameField = () => {
@@ -51,7 +85,7 @@ class SignupForm extends Component {
           PASSWORD
         </label>
         <input
-          type="password"
+          type="text"
           id="password"
           className="password-input-filed"
           value={password}
@@ -62,21 +96,33 @@ class SignupForm extends Component {
   }
 
   renderConfirmPasswordField = () => {
-    const {password} = this.state
+    const {confirmPassword, showPassword, isPasswordMatching} = this.state
+
+    const inputType = showPassword ? 'text' : 'password'
+
     return (
-      <>
+      <div className="confirm-pw-container">
         <label className="input-label" htmlFor="password">
           CONFIRM PASSWORD
         </label>
-        <input
-          type="password"
-          id="password"
-          className="password-input-filed"
-          value={password}
-          onChange={this.onChangeConfirmPassword}
-          placeholder={LuEyeOff}
-        />
-      </>
+        <div className="confirm-password-container">
+          <input
+            type={inputType}
+            id="password"
+            className="confirm-password-filed"
+            value={confirmPassword}
+            onChange={this.onChangeConfirmPassword}
+          />
+          {showPassword ? (
+            <RxEyeOpen onClick={this.onClickShowPassword} />
+          ) : (
+            <LuEyeOff onClick={this.onClickShowPassword} />
+          )}
+        </div>
+        {isPasswordMatching && (
+          <p className="error-message">Password is not matching!</p>
+        )}
+      </div>
     )
   }
 
@@ -84,7 +130,7 @@ class SignupForm extends Component {
     return (
       <div className="bg-container">
         <div className="login-form-container">
-          <form className="form-container">
+          <form className="form-container" onSubmit={this.onsubmitForm}>
             <h1 className="login-heading">Signup</h1>
             <div className="input-container">{this.renderUsernameField()}</div>
             <div className="input-container">{this.renderPasswordField()}</div>
@@ -122,4 +168,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm
+export default SignUp
