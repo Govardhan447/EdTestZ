@@ -1,33 +1,11 @@
 .nav-header {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 100%;
-}
-
-.nav-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 1110px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-.logo-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 300px;
-  height: 150px;
-}
-
-.logo-icon {
-  width: 100px;
-  height: 100px;
-  color: #ffffff;
+  height: 200px;
+  padding: 10px;
 }
 
 @media screen and (min-width: 768px) {
@@ -36,6 +14,43 @@
   }
 }
 
+.active-link {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.trigger-button {
+  background-color: transparent;
+  color: #c7d1e0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.down-btn {
+  font-size: 15px;
+  color: #eff2f7;
+}
+
+.draw-box {
+  border-top: 5px solid #6ddafb;
+  border-radius: 5px;
+  width: 150px;
+  height: auto;
+  background-color: #ffffff;
+  font-size: 13px;
+  font-family: roboto;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
 .nav-menu {
   display: flex;
   flex-direction: row;
@@ -50,13 +65,11 @@
   color: #ffffff;
 }
 .logo {
-  width: 80px;
+  width: 30%;
   height: 80px;
-}
-
-.logo-text {
-  color: #f1f3f2;
-  font-size: 25px;
+  margin: 0px;
+  padding: 0px;
+  color: #ffffff;
 }
 
 @media screen and (max-width: 767px) {
@@ -71,7 +84,7 @@
   margin: 10px;
   font-weight: 400;
   font-size: 16px;
-  color: #eff2f7;
+  color: #c7d1e0;
 }
 
 .logout-desktop-btn {
@@ -106,4 +119,86 @@
 
 .logout-icon {
   width: 24px;
+}
+
+.date-picker-contianer {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: #072a52;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: roboto;
+  padding: 20px;
+}
+
+.date-picker-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #1c4d86;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: roboto;
+}
+.date-picker-item {
+  background-color: transparent;
+  color: #eef4f6;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.logo-datepicker-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+  padding: 15px;
+  color: #ecf0f1;
+  text-align: center;
+  margin: 0px;
+}
+.bug-image {
+  width: 200px;
+  height: 200px;
+  background-color: transparent;
+  margin: 0px;
+}
+.bug-container {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0px;
+}
+
+.date-container {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  padding-top: 20px;
+  margin: 0px;
 }

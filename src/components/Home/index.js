@@ -1,21 +1,14 @@
-import {IoLogoWhatsapp} from 'react-icons/io5'
 import Header from '../Header'
 import './index.css'
 
 const Home = () => (
-  <>
+  <div className="bg-container-home">
     <Header />
-    <div className="home-container">
-      <div className="home-content">
-        <h1>DROP BY OR SAY HELLO</h1>
-        <p>Whatsup Us Your Requirement!</p>
-      </div>
-      <button type="button" className="button">
-        <IoLogoWhatsapp />
-        <p>900-000-0000</p>
-      </button>
+    <div className="bg-images">
+      <h1>Collaborate</h1>
     </div>
-  </>
+    <p>Feed Your Intelligence with Our Testing Approching </p>
+  </div>
 )
 
 export default Home

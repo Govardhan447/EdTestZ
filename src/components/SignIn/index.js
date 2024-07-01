@@ -25,13 +25,13 @@ class SignIn extends Component {
     event.preventDefault()
     const {username, password} = this.state
     const userDetails = {username, password}
-    const url = 'http://localhost/5000/signin'
+    const url = 'http://localhost/3000/signin'
     const options = {
       method: 'POST',
       body: JSON.stringify(userDetails),
     }
     const response = await fetch(url, options)
-    const data = await response.json()
+    await response.json()
     if (response.ok === true) {
       this.onSubmitSuccess()
     }
@@ -94,7 +94,7 @@ class SignIn extends Component {
               Login
             </button>
             <p className="no-account">
-              Don't have an account?
+              Do not have an account?
               <Link to="/signup" className="signup-link">
                 SignUp
               </Link>

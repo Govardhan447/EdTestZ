@@ -27,14 +27,14 @@ class SignUp extends Component {
     const {username, password, confirmPassword} = this.state
 
     if (password === confirmPassword) {
-      const userDetails = {username, password, confirmPassword}
-      const url = 'http://localhost/5000/signup'
+      const userDetails = {username, password}
+      const url = 'http://localhost/3000/signup'
       const options = {
         method: 'POST',
         body: JSON.stringify(userDetails),
       }
       const response = await fetch(url, options)
-      const data = await response.json()
+      await response.json()
       if (response.ok === true) {
         this.onSubmitSuccess()
       }

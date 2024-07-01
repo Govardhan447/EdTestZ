@@ -16,6 +16,6 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-
-  background-image: linear-gradient(to top, #ffffff, #4ae24a);
+  justify-content: flex-start;
+  margin: 0px;
 }

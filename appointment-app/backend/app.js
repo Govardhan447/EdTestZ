@@ -17,8 +17,8 @@ const initilizeDBAndServer = async () => {
       filename: dbpath,
       driver: sqlite3.Database,
     })
-    app.listen(5000, () => {
-      console.log('Server Runnning on http://localhost/5000/')
+    app.listen(3000, () => {
+      console.log('Server Runnning on http://localhost/3000/')
     })
   } catch (e) {
     console.log(`DB error:${e.meassage}`)
@@ -42,17 +42,38 @@ app.post('/signup/', async (request, response) => {
                 user(username, password)
               VALUES
                 ('${username}','${hashedPassword}');`
-    if (password.length < 5) {
-      response.status(400)
-    } else {
-      const dbResponse = await db.run(creatUserQuery)
-      response.status(200)
-    }
+
+    const dbResponse = await db.run(creatUserQuery)
+    const newUserId = dbResponse.lastID
   } else {
     response.status(400)
-    response.send('User already exists')
   }
 })
+
+// Middelware function
+
+const authenticateToken = (request, response, next) => {
+  let jwtToken
+  const authHeader = request.headers['authorization']
+  if (authHeader !== undefined) {
+    jwtToken = authHeader.split(' ')[1]
+  }
+  if (jwtToken === undefined) {
+    response.status(401)
+    response.send('Invalid JWT Token')
+  } else {
+    jwt.verify(jwtToken, 'MY_SECRET_TOKEN', async (error, payload) => {
+      if (error) {
+        response.status(401)
+        response.send('Invalid JWT Token')
+      } else {
+        request.username = payload.username
+        next()
+      }
+    })
+  }
+}
+
 //POST login user Account API 2
 
 app.post('/signin', async (request, response) => {
@@ -63,15 +84,17 @@ app.post('/signin', async (request, response) => {
 
   if (dbUser === undefined) {
     response.status(400)
-    response.send('Invalid user')
   } else {
-    const compareUserPassword = await bcrypt.compare(password, dbUser.password)
-    if (compareUserPassword === true) {
-      response.status(200)
-      response.send('Login success!')
+    const isPasswordMatched = await bcrypt.compare(password, dbUser.password)
+    if (isPasswordMatched === true) {
+      const payload = {
+        username: username,
+      }
+      const jwtToken = jwt.sign(payload, 'MY_SECRET_TOKEN')
+      response.send({jwtToken})
     } else {
       response.status(400)
-      response.send('Invalid password')
+      response.send('Invalid Password')
     }
   }
 })
